@@ -1,0 +1,134 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+scan_timeout = 10
+command_timeout = 10000
+add_newline = true
+continuation_prompt = '▶▶ '
+
+# You can also replace your username with a neat symbol like   
+# or disable this and use the os module below
+[username]
+show_always = true
+style_user = "bold italic purple"
+
+[battery]
+disabled = true
+
+[directory]
+read_only = "  "
+truncation_length = 3
+truncation_symbol = "…/"
+
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Games" = " "
+"Music" = " "
+"Pictures" = " "
+"nvim" = " "
+
+[git_commit]
+tag_symbol = " "
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "none"
+conflicted = ' '
+ahead = ' '
+behind = ' '
+diverged = ' \([ $ahead_count](green)\|[ $behind_count](red)\) '
+up_to_date = '[ ](green)'
+untracked = '[ ](yellow)'
+stashed = '[ ](blue)'
+modified = '[ ](orange)'
+staged = '[ $count ](green)'
+renamed = '[ ](orange)'
+deleted = '[ $count ](red)'
+
+[aws]
+symbol = " "
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = "⌘ "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[meson]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[package]
+symbol = " "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
