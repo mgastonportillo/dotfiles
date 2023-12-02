@@ -28,3 +28,8 @@ fi
 
 . "$HOME/.cargo/env"
 . "$HOME/.config/cloudinary/env"
+
+
+# Added by Toolbox App
+export PATH="$PATH:/home/gale/.local/share/JetBrains/Toolbox/scripts"
+

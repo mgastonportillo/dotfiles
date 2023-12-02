@@ -45,7 +45,7 @@ untracked = ' '
 stashed = '[ ](#FF955C)'
 modified = ' '
 staged = '[ $count ](green)'
-renamed = '[ ](yellow)'
+renamed = '[ ](yellow)'
 deleted = '[ $count ](red)'
 
 [aws]

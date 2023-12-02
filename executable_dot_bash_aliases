@@ -1,5 +1,9 @@
 # System and pseudo-system
 alias distro="lsb_release -ds"
+alias fixss="rm -rf ~/.cache/gstreamer-1.0/"
+alias up="sudo apt update && sudo apt upgrade -y"
+gpgpub() { gpg --export -a "$1" | xclip -selection clipboard; }
+alias sshpub="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard"
 alias cat="batcat"
 alias mirror="scrcpy"
 alias ~="cd ~"
@@ -34,22 +38,22 @@ alias wdimx="trans -p -t es"
 alias protontricks="flatpak run com.github.Matoking.protontricks"
 alias protontricks-launch="flatpak run --command=protontricks-launch com.github.Matoking.protontricks"
 alias architecture="dpkg --print-architecture"
+alias jplocale='env LC_ALL="ja_JP.UTF8"'
 
 # Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    export LS_COLORS="di=1;4;33:ln=36;01:so=32:pi=33:ex=35;01:bd=94:cd=92:su=31:sg=31:tw=1;4;33:ow=1;4;33"
     alias ls="eza -F --color=auto"
     alias la="eza -aF --color=auto"
     alias ll="eza -alh --color=auto"
     alias lr="eza -R --color=auto"
     alias lss="eza -lt --color=auto"
-    export LS_COLORS="di=1;4;33:ln=36;01:so=32:pi=33:ex=35;01:bd=94:cd=92:su=31:sg=31:tw=1;4;33:ow=1;4;33"
     alias grep="grep --color=auto"
     alias fgrep="fgrep --color=auto"
     alias egrep="egrep --color=auto"
 
 fi
-
 
 # Git
 alias ga="git add"
@@ -81,4 +85,4 @@ alias gshl="git stash list"
 alias gshp="git stash pop"
 alias gshs="git stash save"
 alias gundo="git reset --soft HEAD~1"
-function glf() { git log --all --grep="$1"; } # Find by commit message
+glf() { git log --all --grep="$1"; } # Find by commit message
