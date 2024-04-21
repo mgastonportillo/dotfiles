@@ -106,6 +106,10 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/gale/go/bin
 
+# warp shell excused
+export WARP_ENABLE_WAYLAND=1
+export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
+
 export PATH=/home/gale/.cache/rebar3/bin:$PATH
 
 # source /home/gale/.bash_completions/app.py.sh
@@ -126,24 +130,33 @@ export PATH="/home/gale/.turso:$PATH"
 export DISPLAY=:0
 export BROWSER=/usr/bin/wslview
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/gale/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/gale/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/gale/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/gale/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 # automagically source bash_aliases
 precmd() {
   source "$HOME/.bash_aliases"
 }
 
 eval "$(zoxide init bash)"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/gale/conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/gale/conda/etc/profile.d/conda.sh" ]; then
+        . "/home/gale/conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/gale/conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+# pnpm
+export PNPM_HOME="/home/gale/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

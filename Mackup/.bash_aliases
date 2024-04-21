@@ -4,6 +4,7 @@ alias wsbak="/home/gale/workspace_backup.sh"
 alias vim="nvim"
 alias cat="batcat"
 alias cd="z"
+alias :q="exit"
 
 # Directory exploration
 alias ~="z ~"
@@ -21,10 +22,9 @@ alias cd5="z ../../../../../"
 alias wtcf="z ~/.config/wezterm"
 
 # Sourcing
-alias sb="source ~/.bashrc"
-alias sa="source ~/.bash_aliases"
-alias sf="fc-cache -f -v" # Update font cache
-alias venvim="source /home/gale/.config/nvim-venv/bin/activate"
+alias srcb="source ~/.bashrc"
+alias srca="source ~/.bash_aliases"
+alias srcf="fc-cache -f -v" # Update font cache
 
 # Utils
 alias up="sudo apt update && sudo apt upgrade -y"
@@ -86,4 +86,6 @@ alias gshl="git stash list"
 alias gshp="git stash pop"
 alias gshs="git stash save"
 alias gundo="git reset --soft HEAD~1"
+grb() { git rebase -i HEAD~"$1"; } # Interactive rebase
 glf() { git log --all --grep="$1"; } # Find by commit message
+
