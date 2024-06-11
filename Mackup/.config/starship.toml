@@ -6,7 +6,10 @@ command_timeout = 10000
 add_newline = true
 continuation_prompt = '▶▶ '
 
-# You can also replace your username with a neat symbol like   
+[line_break]
+disabled = false
+
+# You can also replace your username with a neat symbol like 
 # or disable this and use the os module below
 [username]
 show_always = true
@@ -28,7 +31,7 @@ truncation_symbol = "…/"
 "Games" = " "
 "Music" = " "
 "Pictures" = " "
-"nvim" = " "
+"nvim" = " "
 
 [git_commit]
 tag_symbol = " "
@@ -131,4 +134,3 @@ symbol = " "
 
 [scala]
 symbol = " "
-

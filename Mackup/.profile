@@ -30,3 +30,5 @@ fi
 # . "$HOME/.config/cloudinary/env"
 
 source "$HOME/.bash-preexec.sh"
+
+[ -f "/home/gale/.ghcup/env" ] && . "/home/gale/.ghcup/env" # ghcup-env
