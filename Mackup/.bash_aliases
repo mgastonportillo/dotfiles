@@ -1,9 +1,17 @@
 alias wsbak="/home/gale/workspace_backup.sh"
 
+# Dev
+alias newnext="npx create-next-app@latest"
+alias newastro="npm create astro@latest"
+alias newastropnpm="pnpm create astro@latest"
+alias newsolidjs="npx degit solidjs/templates/js"
+alias newsolidts="npx degit solidjs/templates/ts"
+
 # Actual aliases
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
+alias sudoedit="sudo -Es nvim"
 alias btw="nvim"
 alias cat="batcat"
 alias cd="z"
@@ -57,6 +65,8 @@ alias archx="dpkg --print-architecture"
 alias sshh="/etc/init.d/ssh"
 alias sshpub="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard" # expose a public ssh key
 gpgpub() { gpg --export -a "$1" | xclip -selection clipboard; } # export a public gpg key
+alias edita="nvim ~/.bash_aliases"
+alias editb="nvim ~/.bashrc"
 
 # Git
 alias ga="git add"

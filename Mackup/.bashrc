@@ -103,6 +103,7 @@ if ! shopt -oq posix; then
     fi
 fi
 
+source ~/.local/share/blesh/ble.sh
 eval "$(starship init bash)"
 
 export LANG=en_US.UTF-8
@@ -136,10 +137,13 @@ export PATH="/home/gale/.turso:$PATH"
 export DISPLAY=:0
 export BROWSER=/usr/bin/wslview
 
+# Kitty
+export PATH=$PATH:/home/gale/.local/kitty.app/bin
+
 # automagically source bash_aliases
-precmd() {
-  source "$HOME/.bash_aliases"
-}
+# precmd() {
+  # source "$HOME/.bash_aliases"
+# }
 
 eval "$(zoxide init bash)"
 
