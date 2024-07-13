@@ -8,6 +8,9 @@ case $- in
     *) return ;;
 esac
 
+# shellcheck disable=SC1090
+[[ $- == *i* ]] && source ~/.local/share/blesh/ble.sh --noattach
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -103,27 +106,24 @@ if ! shopt -oq posix; then
     fi
 fi
 
-source ~/.local/share/blesh/ble.sh
 eval "$(starship init bash)"
 
 export LANG=en_US.UTF-8
-
 export PATH="$HOME/.local/bin:$PATH"
-
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/gale/go/bin
 
-# warp shell excused
-export WARP_ENABLE_WAYLAND=1
-export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
-
+# rebar
 export PATH=/home/gale/.cache/rebar3/bin:$PATH
 
 # source /home/gale/.bash_completions/app.py.sh
 # . /home/gale/.bash_completions/cht.sh
 
+# shellcheck disable=SC1091
 export NVM_DIR="$HOME/.nvm"
+# shellcheck disable=SC1091
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# shellcheck disable=SC1091
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # bun
@@ -140,16 +140,12 @@ export BROWSER=/usr/bin/wslview
 # Kitty
 export PATH=$PATH:/home/gale/.local/kitty.app/bin
 
-# automagically source bash_aliases
-# precmd() {
-  # source "$HOME/.bash_aliases"
-# }
-
 eval "$(zoxide init bash)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/gale/conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# shellcheck disable=SC2181
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -162,7 +158,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
 # pnpm
 export PNPM_HOME="/home/gale/.local/share/pnpm"
 case ":$PATH:" in
@@ -172,3 +167,4 @@ esac
 # pnpm end
 
 [ -f "/home/gale/.ghcup/env" ] && . "/home/gale/.ghcup/env" # ghcup-env
+[[ ${BLE_VERSION-} ]] && ble-attach
