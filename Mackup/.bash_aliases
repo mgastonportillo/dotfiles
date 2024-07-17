@@ -1,13 +1,14 @@
+# workspace backup
 alias wsbak="/home/gale/workspace_backup.sh"
 
-# Dev
+# dev
 alias newnext="npx create-next-app@latest"
 alias newastro="npm create astro@latest"
 alias newastropnpm="pnpm create astro@latest"
 alias newsolidjs="npx degit solidjs/templates/js"
 alias newsolidts="npx degit solidjs/templates/ts"
 
-# Actual aliases
+# aliases
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
@@ -18,7 +19,7 @@ alias cd="z"
 alias :q="exit"
 alias :e="nvim"
 
-# Zoxide
+# zoxide
 alias ~="z ~"
 alias desk="z ~/Desktop"
 alias down="z ~/Downloads"
@@ -34,8 +35,7 @@ alias cd3="z ../../../"
 alias cd4="z ../../../../"
 alias cd5="z ../../../../../"
 
-# Enable colors
-# export LS_COLORS="di=1;4;33:ln=36;01:so=32:pi=33:ex=35;01:bd=94:cd=92:su=31:sg=31:tw=1;4;33:ow=1;4;33"
+# eza / greps
 alias ls="eza -F --color=auto --icons"
 alias la="eza -aF --color=auto --icons"
 alias ll="eza -alh --color=auto --icons"
@@ -44,16 +44,16 @@ alias lss="eza -lt --color=auto --icons"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
-alias tree="tree_fun"
-tree_fun() { eza -T --color=auto --icons -I '.git|node_modules' --level="${1:-2}"; }
+alias tree="eza_tree"
+alias treei="eza_tree I"
 
-# Sourcing
+# sourcing
 alias srcb="source ~/.bashrc"
 alias srca="source ~/.bash_aliases"
-alias srcf="fc-cache -f -v" # Update font cache
+alias srcf="fc-cache -f -v" # update font cache
 
-# Utils
-alias up="sudo apt update && sudo apt upgrade -y"
+# utils
+alias up="sudo apt update && sudo apt upgrade -y && ble-update"
 alias distro="lsb_release -ds"
 alias recentinstalls="grep \" install \" /var/log/apt/history.log"
 alias recentinstallsdetailed="grep \" install \" /var/log/dpkg.log"
@@ -67,6 +67,7 @@ alias sshpub="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard" # expose a pub
 gpgpub() { gpg --export -a "$1" | xclip -selection clipboard; } # export a public gpg key
 alias edita="nvim ~/.bash_aliases"
 alias editb="nvim ~/.bashrc"
+alias editble="nvim ~/.blerc"
 
 # Git
 alias ga="git add"
@@ -86,8 +87,6 @@ alias gchd="git checkout dev"
 alias gd="git diff"
 alias gda="git diff HEAD"
 alias gi="git init"
-# alias glg="git log --graph --oneline --decorate --all"
-# alias gld="git log --pretty=format:'%h %ad %s' --date=short --all"
 alias glg="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %C(green)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gp="git pull"
 alias gpr="git pull --rebase"
@@ -101,6 +100,38 @@ alias gshp="git stash pop"
 alias gshs="git stash save"
 alias gundo="git reset --soft HEAD~1"
 alias gr="git rebase"
-gri() { git rebase -i HEAD~"$1"; } # Interactive rebase
-glf() { git log --all --grep="$1"; } # Find by commit message
+alias gri="rebase_i"
+alias glf="grep_gcm"
 
+# functions
+eza_tree() {
+    local level=2
+    local ignore=()
+    # include ignore patterns if `I` is passed
+    if [[ "$1" == "I" ]]; then
+      ignore=(-I '.git|node_modules')
+      shift 1
+    fi
+    # if the argument is an integer, treat it as new depth level
+    if [[ "$1" =~ ^[0-9]+$ ]]; then
+        level="$1"
+        shift 1
+    fi
+    # allow other eza params
+    params=("$@")
+    eza -TRaF --color=auto --icons "${ignore[@]}" --level="$level" "${params[@]}"
+}
+
+rebase_i() {
+  git rebase -i HEAD~"$1";
+}
+
+grep_gcm() {
+  # grep by commit message
+  git log --all --grep="$1";
+}
+
+# dropped
+# tree_fun() { eza -TRaF --color=auto --icons -I '.git|node_modules' --level="${2:-2}"; }
+# alias glg="git log --graph --oneline --decorate --all"
+# alias gld="git log --pretty=format:'%h %ad %s' --date=short --all"
