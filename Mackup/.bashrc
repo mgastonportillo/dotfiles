@@ -8,6 +8,8 @@ case $- in
     *) return ;;
 esac
 
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+
 # shellcheck disable=SC1090
 [[ $- == *i* ]] && source ~/.local/share/blesh/ble.sh --noattach
 
@@ -106,6 +108,22 @@ if ! shopt -oq posix; then
     fi
 fi
 
+# starship
+function set_terminal_title() {
+    echo -ne "\033]0; ${1}\007"
+}
+
+function preexec() {
+    set_terminal_title "$1"
+}
+
+function precmd() {
+    set_terminal_title "WSL"
+}
+
+export starship_precmd_user_func="precmd"
+
+# attach starship
 eval "$(starship init bash)"
 
 export LANG=en_US.UTF-8

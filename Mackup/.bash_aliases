@@ -68,6 +68,7 @@ gpgpub() { gpg --export -a "$1" | xclip -selection clipboard; } # export a publi
 alias edita="nvim ~/.bash_aliases"
 alias editb="nvim ~/.bashrc"
 alias editble="nvim ~/.blerc"
+alias dotbak="backup_dotfiles"
 
 # Git
 alias ga="git add"
@@ -107,16 +108,19 @@ alias glf="grep_gcm"
 eza_tree() {
     local level=2
     local ignore=()
+
     # include ignore patterns if `I` is passed
     if [[ "$1" == "I" ]]; then
       ignore=(-I '.git|node_modules')
       shift 1
     fi
+
     # if the argument is an integer, treat it as new depth level
     if [[ "$1" =~ ^[0-9]+$ ]]; then
         level="$1"
         shift 1
     fi
+
     # allow other eza params
     params=("$@")
     eza -TRaF --color=auto --icons "${ignore[@]}" --level="$level" "${params[@]}"
@@ -129,6 +133,18 @@ rebase_i() {
 grep_gcm() {
   # grep by commit message
   git log --all --grep="$1";
+}
+
+backup_dotfiles() {
+  local current_dir
+  current_dir=$(pwd)
+
+  cd ~/dotfiles/ || return
+  git add -A
+  git commit -m 'chore: update dotfiles'
+  git push
+
+  cd "$current_dir" || return
 }
 
 # dropped
