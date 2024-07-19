@@ -4,7 +4,7 @@
 scan_timeout = 10
 command_timeout = 10000
 add_newline = true
-continuation_prompt = '▶▶ '
+continuation_prompt = " "
 
 [line_break]
 disabled = false
@@ -16,10 +16,10 @@ show_always = true
 style_user = "bold italic purple"
 
 [battery]
-disabled = true
+disabled = false
 
 [directory]
-read_only = "  "
+read_only = " 󰌾 "
 truncation_length = 3
 truncation_symbol = "…/"
 
@@ -32,30 +32,34 @@ truncation_symbol = "…/"
 "Music" = " "
 "Pictures" = " "
 "nvim" = " "
+"workspace" = " "
 
 [git_commit]
-tag_symbol = " "
+tag_symbol = "[ ](red)"
 
 [git_status]
-format = '([$all_status$ahead_behind]($style) )'
+format = "([$all_status$ahead_behind]($style) )"
 style = "none"
-conflicted = ' '
-ahead = ' '
-behind = ' '
-diverged = ' \([ $ahead_count](green)\|[ $behind_count](red)\ )'
-up_to_date = '[ ](green)'
-untracked = ' '
-stashed = '[ ](#FF955C)'
-modified = ' '
-staged = '[ $count ](green)'
-renamed = '[ ](yellow)'
-deleted = '[ $count ](red)'
+conflicted = " $count"
+ahead = " $count"
+behind = " $count"
+diverged = ' \([ $ahead_count](green)\|[ $behind_count](red)\)'
+up_to_date = "[ ](green)"
+untracked = " $count "
+stashed = "[ $count](purple) "
+modified = " $count "
+staged = "[ $count](green) "
+renamed = "[ $count](yellow) "
+deleted = "[ $count](red) "
 
 [aws]
 symbol = " "
 
 [buf]
 symbol = " "
+
+[bun]
+symbol = " "
 
 [c]
 symbol = " "
@@ -77,6 +81,9 @@ symbol = " "
 
 [git_branch]
 symbol = " "
+
+[gleam]
+symbol = " "
 
 [golang]
 symbol = " "
@@ -117,6 +124,9 @@ symbol = " "
 [nodejs]
 symbol = " "
 
+[ocaml]
+symbol = " "
+
 [package]
 symbol = " "
 
@@ -134,3 +144,6 @@ symbol = " "
 
 [scala]
 symbol = " "
+
+[zig]
+symbol = " "

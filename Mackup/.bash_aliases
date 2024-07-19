@@ -64,7 +64,7 @@ alias wdimx="trans -p -t es"
 alias archx="dpkg --print-architecture"
 alias sshh="/etc/init.d/ssh"
 alias sshpub="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard" # expose a public ssh key
-gpgpub() { gpg --export -a "$1" | xclip -selection clipboard; } # export a public gpg key
+gpgpub() { gpg --export -a "$1" | xclip -selection clipboard; }   # export a public gpg key
 alias edita="nvim ~/.bash_aliases"
 alias editb="nvim ~/.bashrc"
 alias editble="nvim ~/.blerc"
@@ -106,45 +106,59 @@ alias glf="grep_gcm"
 
 # functions
 eza_tree() {
-    local level=2
-    local ignore=()
+  local level=2
+  local ignore=()
 
-    # include ignore patterns if `I` is passed
-    if [[ "$1" == "I" ]]; then
-      ignore=(-I '.git|node_modules')
-      shift 1
-    fi
+  # include ignore patterns if `I` is passed
+  if [[ "$1" == "I" ]]; then
+    ignore=(-I '.git|node_modules')
+    shift 1
+  fi
 
-    # if the argument is an integer, treat it as new depth level
-    if [[ "$1" =~ ^[0-9]+$ ]]; then
-        level="$1"
-        shift 1
-    fi
+  # if the argument is an integer, treat it as new depth level
+  if [[ "$1" =~ ^[0-9]+$ ]]; then
+    level="$1"
+    shift 1
+  fi
 
-    # allow other eza params
-    params=("$@")
-    eza -TRaF --color=auto --icons "${ignore[@]}" --level="$level" "${params[@]}"
+  # allow other eza params
+  params=("$@")
+  eza -TRaF --color=auto --icons "${ignore[@]}" --level="$level" "${params[@]}"
 }
 
 rebase_i() {
-  git rebase -i HEAD~"$1";
+  git rebase -i HEAD~"$1"
 }
 
 grep_gcm() {
   # grep by commit message
-  git log --all --grep="$1";
+  git log --all --grep="$1"
 }
 
 backup_dotfiles() {
   local current_dir
   current_dir=$(pwd)
 
-  cd ~/dotfiles/ || return
-  git add -A
-  git commit -m 'chore: update dotfiles'
-  git push
-
-  cd "$current_dir" || return
+  # Prompt for confirmation
+  while true; do
+    read -rp "Do you want to backup dotfiles? (y/n): " yn
+    case "$yn" in
+    [Yy]*)
+      # Change directory and perform git operations
+      cd ~/dotfiles/ || return
+      git add -A
+      git commit -m 'chore: update dotfiles'
+      git push
+      cd "$current_dir" || return
+      break
+      ;;
+    [Nn]*)
+      echo "Backup aborted."
+      return 1
+      ;;
+    *) echo "Please answer yes or no." ;;
+    esac
+  done
 }
 
 # dropped
