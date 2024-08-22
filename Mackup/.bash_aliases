@@ -12,20 +12,24 @@ alias newsolidts="npx degit solidjs/templates/ts"
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
+alias edit="nvim"
 alias sudoedit="sudo -Es nvim"
 alias btw="nvim"
 alias cat="batcat"
 alias cd="z"
-alias :q="exit"
+alias open="wslview"
 alias :e="nvim"
+alias :q="exit"
 
 # zoxide
 alias ~="z ~"
+alias work="z ~/workspace"
 alias desk="z ~/Desktop"
 alias down="z ~/Downloads"
 alias docs="z ~/Documents"
 alias pics="z ~/Pictures"
 alias game="z ~/Games"
+alias notes="z ~/vault"
 alias win="z \$USERPROFILE"
 alias nvcf="z ~/.config/nvim"
 alias wtcf="z ~/.config/wezterm"
@@ -55,6 +59,7 @@ alias srcf="fc-cache -f -v" # update font cache
 # utils
 alias up="sudo apt update && sudo apt upgrade -y && ble-update"
 alias distro="lsb_release -ds"
+alias osinfo="cat /etc/lsb-release"
 alias recentinstalls="grep \" install \" /var/log/apt/history.log"
 alias recentinstallsdetailed="grep \" install \" /var/log/dpkg.log"
 alias how="cht.sh"
@@ -88,7 +93,7 @@ alias gchd="git checkout dev"
 alias gd="git diff"
 alias gda="git diff HEAD"
 alias gi="git init"
-alias gl="git log --graph --pretty=format:'%C(yellow)%h%Creset%C(auto)%d %Creset%s'"
+alias gl="git log --oneline"
 alias glg="git log --graph --pretty=format:'%C(yellow)%h %C(bold blue)<%an> %C(green italic)%ar%Creset%C(auto)%d%n%Creset%s'"
 alias gp="git pull"
 alias gpr="git pull --rebase"
@@ -112,7 +117,7 @@ eza_tree() {
 
   # include ignore patterns if `I` is passed
   if [[ "$1" == "I" ]]; then
-    ignore=(-I '.git|node_modules')
+    ignore=(-I '.git|node_modules|.github')
     shift 1
   fi
 
@@ -162,7 +167,7 @@ backup_dotfiles() {
   done
 }
 
-# dropped
+# archive
 # tree_fun() { eza -TRaF --color=auto --icons -I '.git|node_modules' --level="${2:-2}"; }
 # alias glg="git log --graph --oneline --decorate --all"
 # alias gld="git log --pretty=format:'%h %ad %s' --date=short --all"
